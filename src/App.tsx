@@ -57,7 +57,7 @@ function App() {
   }, [])
 
   const getDogs = async () => {
-    const response = await fetch('http://localhost:8000/dogs')
+    const response = await fetch('http://react-php-production.up.railway.app/dogs')
     const dog = await response.json()
     setDogs(dog)
   }
