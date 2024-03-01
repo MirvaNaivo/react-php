@@ -56,8 +56,13 @@ function App() {
     getDogs()
   }, [])
 
+  const url = (process.env.REACT_APP_BACKEND_URL)
+  if(url === undefined) {
+    return console.log("False url")
+  }
+
   const getDogs = async () => {
-    const response = await fetch('http://react-php-production.up.railway.app/dogs')
+    const response = await fetch(url)
     const dog = await response.json()
     setDogs(dog)
   }
