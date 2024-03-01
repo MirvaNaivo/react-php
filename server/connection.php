@@ -1,14 +1,14 @@
 <?php
 class DBConnection
 {
-    private $server = 'localhost';
-    private $dbname = 'docker-php';
-    private $user = 'root';
-    private $pass = 'root';
+    private $MYSQLHOST = 'viaduct.proxy.rlwy.net';
+    private $MYSQLDATABASE = 'railway';
+    private $MYSQLUSER = 'root';
+    private $MYSQLPASSWORD = 'GF3c2EE2AdfA6De2ce41ge3f4FHaB5-b';
     public function connect()
     {
         try {
-            $conn = new PDO('mysql:host=' . $this->server . ';dbname=' . $this->dbname, $this->user, $this->pass);
+            $conn = new PDO('mysql:host=' . $this->MYSQLHOST . ';dbname=' . $this->MYSQLDATABASE, $this->MYSQLUSER, $this->MYSQLPASSWORD);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $conn;
         } catch (\Exception $e) {
