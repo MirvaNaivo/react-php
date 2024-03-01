@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import "dotenv/config"
 import Container from '@mui/material/Container'
 import { AppBar, Box, Button, CardActions, CardContent, CardMedia, Grid, Toolbar, Typography } from '@mui/material'
 import Divider from '@mui/material/Divider';
@@ -53,19 +54,17 @@ function App() {
   const handleClose = () => setOpen(false)
 
   useEffect(() => {
+    const url = (process.env.REACT_APP_BACKEND_URL)
+    if (url === undefined) {
+      return console.log("False url")
+    }
+    const getDogs = async () => {
+      const response = await fetch(url)
+      const dog = await response.json()
+      setDogs(dog)
+    }
     getDogs()
   }, [])
-
-  const url = (process.env.REACT_APP_BACKEND_URL)
-  if(url === undefined) {
-    return console.log("False url")
-  }
-
-  const getDogs = async () => {
-    const response = await fetch(url)
-    const dog = await response.json()
-    setDogs(dog)
-  }
 
   const checkInfo = async (id: number) => {
     const findDog = dogs.find((dog) => {
@@ -103,14 +102,14 @@ function App() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <br/>
+      <br />
 
       <Grid container
         spacing={3}
         justifyContent="center"
         alignItems="stretch">
-        
-          {dogs.map(dog =>
+
+        {dogs.map(dog =>
           <Grid item sm={3} >
             <Card sx={{ maxWidth: 345 }}>
               <CardMedia
@@ -128,8 +127,8 @@ function App() {
                 <Button onClick={() => checkInfo(dog.dog_id)}>Read More</Button>
               </CardActions>
             </Card>
-            </Grid>
-          )}
+          </Grid>
+        )}
       </Grid>
 
       <Modal
